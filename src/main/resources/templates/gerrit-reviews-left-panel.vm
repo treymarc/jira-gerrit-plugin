@@ -1,4 +1,5 @@
 #*
+Copyright 2013 Trey Marc.
 Copyright 2012 MeetMe, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,45 @@ limitations under the License.
 *#
 
 ### See utility.vm
+
+#macro( getIcoForGerritStatus $gerritStatus )
+#if( $gerritStatus == "NEW" )
+    #set( $labelIcoClasse = "aui-icon-info" )
+    #set( $labelClasse = "aui-lozenge-complete" )  
+#elseif(  $gerritStatus == "MERGED"  )
+    #set( $labelIcoClasse = "aui-icon-success" )
+    #set( $labelClasse = "aui-lozenge-success" )
+#elseif(  $gerritStatus == "ABANDONED"  )
+   #set( $labelIcoClasse = "aui-icon-error" )
+   #set( $labelClasse = "aui-lozenge-error" )
+#else
+   #set( $labelIcoClasse = "aui-lozenge-generic" )
+   #set( $labelClasse = "aui-lozenge-moved" )
+#end
+
+ <span class="aui-icon $labelIcoClasse">$gerritStatus</span>
+
+#end
+
+
+#macro( getLabelForGerritStatus $gerritStatus )
+#if( $gerritStatus == "NEW" )
+    #set( $labelIcoClasse = "aui-icon-info" )
+    #set( $labelClasse = "aui-lozenge-complete" )  
+#elseif(  $gerritStatus == "MERGED"  )
+    #set( $labelIcoClasse = "aui-icon-success" )
+    #set( $labelClasse = "aui-lozenge-success" )
+#elseif(  $gerritStatus == "ABANDONED"  )
+   #set( $labelIcoClasse = "aui-icon-error" )
+   #set( $labelClasse = "aui-lozenge-error" )
+#else
+   #set( $labelIcoClasse = "aui-lozenge-generic" )
+   #set( $labelClasse = "aui-lozenge-moved" )
+#end
+
+ <span class="aui-lozenge $labelClasse">$gerritStatus</span>
+
+#end
 
 
 #* Calculates and displays the most significant approval score *#
@@ -51,33 +91,23 @@ limitations under the License.
     </span>
 #end
 
-
-
 #* Displays a single Review Detail record, in the expanded subtasks list *#
 #macro( leftReviewDetail $change )
     <tr class="issuerow">
-
         <td class="nav gerrit-changeid">
-            $change.number,$change.patchSet.number
+            ($change.number,$change.patchSet.number)
         </td>
-
 		<td class="nav gerrit-subject">
             <a href="$change.url" title="$change.subject" target="gerrit-review-$change.number,$change.patchSet.number">$change.subject</a>
         </td>
-
         <td class="nav gerrit-project">
             $change.project
         </td>
-
-        <td class="nav gerrit-status gerrit-status-$change.status">
-            <span class="gerrit-review" title="$change.number,$change.patchSet.number: ($change.status)">$i18n.getText('gerrit.tabpanel.Status'): </span>
-            $change.status
+        <td class="nav gerrit-status">#getLabelForGerritStatus($change.status)
         </td>
-
         <td class="nav gerrit-review-score">
             #mostSignificantScore(${change.patchSet.getApprovalsForLabel("CRVW")})
         </td>
-
         <td class="nav gerrit-review-score">
             #mostSignificantScore(${change.patchSet.getApprovalsForLabel("VRIF")})
         </td>
@@ -105,23 +135,22 @@ limitations under the License.
 
 #else
 
-    <table id="gerrit-reviews-left-panel">
+
+    <table id="gerrit-reviews-left-panel" class="aui aui-table-sortable">
         <thead>
             <tr>
-                <th>#</th>
+                <th><button  class="aui-button aui-dropdown2-trigger  aui-button-subtle" aria-owns="dropdown2-more" aria-haspopup="true"><span class="aui-icon aui-icon-small icon-tools-small">View</span></button>
+			    <div id="dropdown2-more" class="aui-dropdown2 aui-style-default">
+			        <ul class="aui-list-truncate">
+			            <li><a href="$dashboardUrl">$i18n.getText("gerrit-reviews-left-panel.view-on-gerrit-dashboard")</a></li>
+			        </ul>
+			    </div></th>
                 <th>Subject</th>
                 <th>Project</th>
                 <th>Status</th>
-                <th title="$i18n.getText('gerrit.tabpanel.most_significant_score')">CR</th>
-                <th title="$i18n.getText('gerrit.tabpanel.most_significant_score')">V</th>
-            </tr>
-            #if ( $dashboardUrl && $dashboardPart )
-            <tr>
-                <th colspan="6" class="dashboardHeader">
-                    For Gerrit Dashboard: <a href="$dashboardUrl">$dashboardPart</a>
-                </th>
-            </tr>
-            #end
+                <th>CR</th>
+                <th>V</th>
+			</tr>
         </thead>
         <tbody>
             #foreach ($change in $changes)
@@ -129,9 +158,7 @@ limitations under the License.
                     #leftReviewDetail( $change )
                 #end
             #end
-        <tbody>
 
-        <tbody>
             #foreach ( $change in $changes)
                 #if (!$change.isOpen())
                     #leftReviewDetail( $change )

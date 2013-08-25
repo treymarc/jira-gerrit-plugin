@@ -1,20 +1,20 @@
-#*  
-	Copyright 2012 MeetMe, Inc.
+#*
+Copyright 2013 Trey Marc.
+Copyright 2012 MeetMe, Inc.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the
-    License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing,
-    software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See
-    the License for the specific language governing permissions and
-    limitations under the License.*#
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*#
+
 
 
     ### See utility.vm
@@ -43,6 +43,40 @@
     #end
 
 
+#macro( getIcoForGerritStatus $gerritStatus )
+#if( $gerritStatus == "NEW" )
+    #set( $labelIcoClasse = "aui-icon-info" )
+    #set( $labelClasse = "aui-lozenge-complete" )  
+#elseif(  $gerritStatus == "MERGED"  )
+    #set( $labelIcoClasse = "aui-icon-success" )
+    #set( $labelClasse = "aui-lozenge-success" )
+#elseif(  $gerritStatus == "ABANDONED"  )
+   #set( $labelIcoClasse = "aui-icon-error" )
+   #set( $labelClasse = "aui-lozenge-error" )
+#else
+   #set( $labelIcoClasse = "aui-lozenge-generic" )
+   #set( $labelClasse = "aui-lozenge-moved" )
+#end
+ <span class="aui-icon $labelIcoClasse">$gerritStatus</span>
+#end
+
+
+#macro( getLabelForGerritStatus $gerritStatus )
+#if( $gerritStatus == "NEW" )
+    #set( $labelIcoClasse = "aui-icon-info" )
+    #set( $labelClasse = "aui-lozenge-complete" )  
+#elseif(  $gerritStatus == "MERGED"  )
+    #set( $labelIcoClasse = "aui-icon-success" )
+    #set( $labelClasse = "aui-lozenge-success" )
+#elseif(  $gerritStatus == "ABANDONED"  )
+   #set( $labelIcoClasse = "aui-icon-error" )
+   #set( $labelClasse = "aui-lozenge-error" )
+#else
+   #set( $labelIcoClasse = "aui-lozenge-generic" )
+   #set( $labelClasse = "aui-lozenge-moved" )
+#end
+ <span class="aui-lozenge $labelClasse">$gerritStatus</span>
+#end
 
     #* Displays a single Review Detail record, in the expanded subtasks list *#
     #macro( reviewDetail $change )
@@ -132,6 +166,7 @@
             <ol>
                 #foreach ($change in $changes)
                 <li>
+                #getLabelForGerritStatus($change.status)
                     #reviewDetail( $change )
                 </li>
                 #end

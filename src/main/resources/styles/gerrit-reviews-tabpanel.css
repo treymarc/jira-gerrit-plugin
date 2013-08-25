@@ -35,28 +35,6 @@ div.flooded span.review-positive,
   color: #08A400;
 }
 
-.gerrit-status-ABANDONED span.gerrit-review
-{
-  background-image: url(images/gerrit-x.png);
-}
-
-.gerrit-status-MERGED span.gerrit-review,
-.gerrit-status-SUBMITTED span.gerrit-review
-{
-  background-image: url(images/gerrit-check.png);
-}
-
-span.gerrit-review
-{
-  display: inline-block;
-  text-indent: -9999px;
-  width: 16px;
-  height: 16px;
-  background-color: transparent;
-  background-image: url(images/gerrit-icon16.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
 
 span.gerrit-open-reviews
 {

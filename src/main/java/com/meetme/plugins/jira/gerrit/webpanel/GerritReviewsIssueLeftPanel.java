@@ -62,7 +62,8 @@ public class GerritReviewsIssueLeftPanel implements CacheableContextProvider {
     public void init(Map<String, String> params) throws PluginParseException {
         // No init
     }
-
+    
+    
     @Override
     public Map<String, Object> getContextMap(Map<String, Object> context) {
         setUpRequestParams(context);
