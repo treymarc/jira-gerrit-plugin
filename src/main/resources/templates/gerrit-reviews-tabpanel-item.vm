@@ -129,8 +129,8 @@ limitations under the License.
         </div>
 
         ## Main action detail
-        <div class="action-details">
-            $change.number,$change.patchSet.number
+        <div class="action-details">#getIcoForGerritStatus($change.status)
+            ($change.number,$change.patchSet.number)
             <a href="$change.url" target="gerrit-review-$change.number,$change.patchSet.number">$change.subject</a>
             -
             <span class="subText">
