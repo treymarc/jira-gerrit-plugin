@@ -1,4 +1,4 @@
-<!--#*
+#*
     Copyright 2012 MeetMe, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
     See
     the License for the specific language governing permissions and
     limitations under the License.
-    *#
+*#
 
     ### See utility.vm
 
@@ -63,7 +63,7 @@
     #else
     #set( $openClass = "gerrit-review-closed" )
     #end
--->
+
 <div class="issue-data-block twixi-block collapsed $statusClass $openClass">
     ## The concise version:
     <div class="actionContainer twixi-wrap concise">

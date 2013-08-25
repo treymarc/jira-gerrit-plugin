@@ -80,12 +80,12 @@ span.gerrit-no-reviews
 #gerrit-reviews-side-panel ul.item-details dl dd
 {
   width: 18%;
-  text-align: right;
+  text-align: left;
 }
 
 #gerrit-reviews-side-panel ul.item-details dl dd span.gerrit-review
 {
-  text-indent: 9999px;
+  
   vertical-align: middle;
 }
 

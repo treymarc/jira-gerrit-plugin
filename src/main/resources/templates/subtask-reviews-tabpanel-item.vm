@@ -1,5 +1,5 @@
-<!--#*
-    Copyright 2012 MeetMe, Inc.
+#*  
+	Copyright 2012 MeetMe, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the
@@ -14,8 +14,8 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See
     the License for the specific language governing permissions and
-    limitations under the License.
-    *#
+    limitations under the License.*#
+
 
     ### See utility.vm
 
@@ -71,7 +71,7 @@
 
     #set( $issueUrl = "${baseurl}/browse/${subtask.key}" )
     #set( $hasChanges = $changes.size() > 0 )
--->
+
 <div class="issue-data-block twixi-block collapsed">
 
     ## The concise version (just the subtasks):

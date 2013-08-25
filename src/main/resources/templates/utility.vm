@@ -1,8 +1,8 @@
-<!-- ### XXX: This file is not actually included, due to an issue with VTL and #macro() inside a #parse-d file:
-    #### XXX: See http://wiki.apache.org/velocity/MacroIssues
+### XXX: This file is not actually included, due to an issue with VTL and #macro() inside a #parse-d file:
+#### XXX: See http://wiki.apache.org/velocity/MacroIssues
 
+#* Calculates and displays the most significant approval score *#
 
-    #* Calculates and displays the most significant approval score *#
     #macro( mostSignificantScore $approvals )
     #set( $significant = 0 )
 
@@ -39,4 +39,3 @@
     ($change.status)
     #end
     #end
--->
